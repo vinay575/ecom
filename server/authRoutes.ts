@@ -104,6 +104,13 @@ export function registerAuthRoutes(app: Express) {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
+      await storage.createLoginEvent({
+        userId: user.id,
+        ip: req.ip || req.headers['x-forwarded-for'] as string || 'unknown',
+        userAgent: req.headers['user-agent'] || 'unknown',
+        device: req.headers['user-agent']?.includes('Mobile') ? 'mobile' : 'desktop',
+      });
+
       res.json({
         user: {
           id: user.id,

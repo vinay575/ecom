@@ -154,6 +154,45 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.post("/api/cart/merge", isAuthenticated, async (req: any, res) => {
+    try {
+      const userId = req.user.claims.sub;
+      
+      const bodySchema = z.object({
+        items: z.array(z.object({
+          productId: z.string(),
+          quantity: z.number().int().positive(),
+        })),
+      });
+      const validated = bodySchema.parse(req.body);
+      
+      const existingCartItems = await storage.getCartItems(userId);
+      
+      for (const item of validated.items) {
+        const existingItem = existingCartItems.find(ci => ci.productId === item.productId);
+        
+        if (existingItem) {
+          await storage.updateCartItem(existingItem.id, existingItem.quantity + item.quantity);
+        } else {
+          await storage.addToCart({
+            userId,
+            productId: item.productId,
+            quantity: item.quantity,
+          });
+        }
+      }
+      
+      const updatedCart = await storage.getCartItems(userId);
+      res.json(updatedCart);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ message: "Invalid request data", errors: error.errors });
+      }
+      console.error("Error merging cart:", error);
+      res.status(500).json({ message: "Failed to merge cart" });
+    }
+  });
+
   // Wishlist routes (protected)
   app.get("/api/wishlist", isAuthenticated, async (req: any, res) => {
     try {
@@ -334,43 +373,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Testimonials API
   app.get("/api/testimonials", async (req, res) => {
     try {
-      const testimonials = [
-        {
-          id: 1,
-          name: "Sarah Johnson",
-          role: "Marketing Director",
-          avatar: "/attached_assets/generated_images/Female_customer_testimonial_avatar_0a96e832.png",
-          rating: 5,
-          content: "Amazing platform! Found exactly what I needed for my project. The quality of products is outstanding and the purchasing process was seamless. Highly recommended!",
-          verified: true
-        },
-        {
-          id: 2,
-          name: "Michael Chen",
-          role: "Freelance Developer",
-          avatar: "/attached_assets/generated_images/Male_customer_testimonial_avatar_3deee3e5.png",
-          rating: 5,
-          content: "Great quality products and excellent customer service. The digital assets I purchased have significantly improved my workflow. Will definitely buy again!",
-          verified: true
-        },
-        {
-          id: 3,
-          name: "Emma Rodriguez",
-          role: "UI/UX Designer",
-          avatar: "/attached_assets/generated_images/Young_female_testimonial_avatar_013dea30.png",
-          rating: 5,
-          content: "Love the variety of digital products available. The checkout process was smooth and easy. Customer support responded quickly when I had questions.",
-          verified: true
-        },
-        {
-          id: 4,
-          name: "David Kim",
-          role: "Business Owner",
-          rating: 4,
-          content: "Excellent marketplace with professional products. The pricing is fair and the instant delivery is a huge plus. Would love to see more categories in the future!",
-          verified: true
-        }
-      ];
+      const testimonials = await storage.getTestimonials(true);
       res.json(testimonials);
     } catch (error) {
       console.error("Error fetching testimonials:", error);
@@ -398,6 +401,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
       });
       const validated = bodySchema.parse(req.body);
       
+      await storage.addNewsletterSubscriber(validated.email);
+      
       res.json({ 
         success: true, 
         message: "Successfully subscribed to newsletter!",
@@ -421,6 +426,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         message: z.string().optional(),
       });
       const validated = bodySchema.parse(req.body);
+      
+      await storage.createProductRequest({
+        productName: validated.productName,
+        email: validated.email,
+        message: validated.message,
+      });
       
       res.json({ 
         success: true, 

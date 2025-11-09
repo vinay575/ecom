@@ -8,7 +8,12 @@ import type {
   Order, InsertOrder,
   OrderItem, InsertOrderItem,
   Review, InsertReview,
-  Wishlist, InsertWishlist
+  Wishlist, InsertWishlist,
+  LoginEvent, InsertLoginEvent,
+  NewsletterSubscriber, InsertNewsletterSubscriber,
+  ProductRequest, InsertProductRequest,
+  Testimonial, InsertTestimonial,
+  Deal, InsertDeal
 } from "@shared/schema";
 
 export interface IStorage {
@@ -35,6 +40,7 @@ export interface IStorage {
   
   getUserOrders(userId: string): Promise<Order[]>;
   getOrder(id: string): Promise<Order | undefined>;
+  getOrderByPaymentIntentId(paymentIntentId: string): Promise<Order | undefined>;
   getOrderWithItems(id: string): Promise<(Order & { items: (OrderItem & { product: Product })[] }) | undefined>;
   createOrder(order: InsertOrder): Promise<Order>;
   createOrderItem(item: InsertOrderItem): Promise<OrderItem>;
@@ -47,6 +53,30 @@ export interface IStorage {
   getWishlistItemById(id: string): Promise<Wishlist | undefined>;
   addToWishlist(item: InsertWishlist): Promise<Wishlist>;
   removeFromWishlist(id: string): Promise<void>;
+  
+  createLoginEvent(event: InsertLoginEvent): Promise<LoginEvent>;
+  getLoginEvents(userId?: string): Promise<LoginEvent[]>;
+  getLoginAnalytics(days?: number): Promise<any>;
+  
+  getNewsletterSubscribers(): Promise<NewsletterSubscriber[]>;
+  addNewsletterSubscriber(email: string): Promise<NewsletterSubscriber>;
+  removeNewsletterSubscriber(id: string): Promise<void>;
+  
+  getProductRequests(status?: string): Promise<ProductRequest[]>;
+  createProductRequest(request: InsertProductRequest): Promise<ProductRequest>;
+  updateProductRequestStatus(id: string, status: string): Promise<ProductRequest | undefined>;
+  
+  getTestimonials(visibleOnly?: boolean): Promise<Testimonial[]>;
+  getTestimonial(id: string): Promise<Testimonial | undefined>;
+  createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
+  updateTestimonial(id: string, testimonial: Partial<InsertTestimonial>): Promise<Testimonial | undefined>;
+  deleteTestimonial(id: string): Promise<void>;
+  
+  getDeals(activeOnly?: boolean): Promise<Deal[]>;
+  getDeal(id: string): Promise<Deal | undefined>;
+  createDeal(deal: InsertDeal): Promise<Deal>;
+  updateDeal(id: string, deal: Partial<InsertDeal>): Promise<Deal | undefined>;
+  deleteDeal(id: string): Promise<void>;
 }
 
 export class DbStorage implements IStorage {
@@ -177,6 +207,12 @@ export class DbStorage implements IStorage {
     return order;
   }
 
+  async getOrderByPaymentIntentId(paymentIntentId: string): Promise<Order | undefined> {
+    const [order] = await db.select().from(schema.orders)
+      .where(eq(schema.orders.paymentIntentId, paymentIntentId));
+    return order;
+  }
+
   async getOrderWithItems(id: string): Promise<(Order & { items: (OrderItem & { product: Product })[] }) | undefined> {
     const [order] = await db.select().from(schema.orders).where(eq(schema.orders.id, id));
     if (!order) return undefined;
@@ -252,6 +288,155 @@ export class DbStorage implements IStorage {
 
   async removeFromWishlist(id: string): Promise<void> {
     await db.delete(schema.wishlist).where(eq(schema.wishlist.id, id));
+  }
+
+  async createLoginEvent(event: InsertLoginEvent): Promise<LoginEvent> {
+    const [loginEvent] = await db.insert(schema.loginEvents).values(event).returning();
+    return loginEvent;
+  }
+
+  async getLoginEvents(userId?: string): Promise<LoginEvent[]> {
+    if (userId) {
+      return await db.select().from(schema.loginEvents)
+        .where(eq(schema.loginEvents.userId, userId))
+        .orderBy(desc(schema.loginEvents.createdAt));
+    }
+    return await db.select().from(schema.loginEvents)
+      .orderBy(desc(schema.loginEvents.createdAt));
+  }
+
+  async getLoginAnalytics(days: number = 30): Promise<any> {
+    const since = new Date();
+    since.setDate(since.getDate() - days);
+    
+    const events = await db.select().from(schema.loginEvents)
+      .where(sql`${schema.loginEvents.createdAt} >= ${since}`);
+    
+    return {
+      totalLogins: events.length,
+      uniqueUsers: new Set(events.map(e => e.userId)).size,
+      byDate: events.reduce((acc, event) => {
+        const date = event.createdAt.toISOString().split('T')[0];
+        acc[date] = (acc[date] || 0) + 1;
+        return acc;
+      }, {} as Record<string, number>)
+    };
+  }
+
+  async getNewsletterSubscribers(): Promise<NewsletterSubscriber[]> {
+    return await db.select().from(schema.newsletterSubscribers)
+      .where(eq(schema.newsletterSubscribers.isActive, true))
+      .orderBy(desc(schema.newsletterSubscribers.createdAt));
+  }
+
+  async addNewsletterSubscriber(email: string): Promise<NewsletterSubscriber> {
+    const [subscriber] = await db.insert(schema.newsletterSubscribers)
+      .values({ email })
+      .onConflictDoUpdate({
+        target: schema.newsletterSubscribers.email,
+        set: { isActive: true }
+      })
+      .returning();
+    return subscriber;
+  }
+
+  async removeNewsletterSubscriber(id: string): Promise<void> {
+    await db.update(schema.newsletterSubscribers)
+      .set({ isActive: false })
+      .where(eq(schema.newsletterSubscribers.id, id));
+  }
+
+  async getProductRequests(status?: string): Promise<ProductRequest[]> {
+    if (status) {
+      return await db.select().from(schema.productRequests)
+        .where(eq(schema.productRequests.status, status))
+        .orderBy(desc(schema.productRequests.createdAt));
+    }
+    return await db.select().from(schema.productRequests)
+      .orderBy(desc(schema.productRequests.createdAt));
+  }
+
+  async createProductRequest(request: InsertProductRequest): Promise<ProductRequest> {
+    const [newRequest] = await db.insert(schema.productRequests).values(request).returning();
+    return newRequest;
+  }
+
+  async updateProductRequestStatus(id: string, status: string): Promise<ProductRequest | undefined> {
+    const [updated] = await db.update(schema.productRequests)
+      .set({ status })
+      .where(eq(schema.productRequests.id, id))
+      .returning();
+    return updated;
+  }
+
+  async getTestimonials(visibleOnly: boolean = false): Promise<Testimonial[]> {
+    if (visibleOnly) {
+      return await db.select().from(schema.testimonials)
+        .where(eq(schema.testimonials.isVisible, true))
+        .orderBy(desc(schema.testimonials.createdAt));
+    }
+    return await db.select().from(schema.testimonials)
+      .orderBy(desc(schema.testimonials.createdAt));
+  }
+
+  async getTestimonial(id: string): Promise<Testimonial | undefined> {
+    const [testimonial] = await db.select().from(schema.testimonials)
+      .where(eq(schema.testimonials.id, id));
+    return testimonial;
+  }
+
+  async createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial> {
+    const [newTestimonial] = await db.insert(schema.testimonials).values(testimonial).returning();
+    return newTestimonial;
+  }
+
+  async updateTestimonial(id: string, testimonial: Partial<InsertTestimonial>): Promise<Testimonial | undefined> {
+    const [updated] = await db.update(schema.testimonials)
+      .set(testimonial)
+      .where(eq(schema.testimonials.id, id))
+      .returning();
+    return updated;
+  }
+
+  async deleteTestimonial(id: string): Promise<void> {
+    await db.delete(schema.testimonials).where(eq(schema.testimonials.id, id));
+  }
+
+  async getDeals(activeOnly: boolean = false): Promise<Deal[]> {
+    const now = new Date();
+    if (activeOnly) {
+      return await db.select().from(schema.deals)
+        .where(and(
+          eq(schema.deals.isActive, true),
+          sql`${schema.deals.startDate} <= ${now}`,
+          sql`${schema.deals.endDate} >= ${now}`
+        ))
+        .orderBy(desc(schema.deals.createdAt));
+    }
+    return await db.select().from(schema.deals)
+      .orderBy(desc(schema.deals.createdAt));
+  }
+
+  async getDeal(id: string): Promise<Deal | undefined> {
+    const [deal] = await db.select().from(schema.deals).where(eq(schema.deals.id, id));
+    return deal;
+  }
+
+  async createDeal(deal: InsertDeal): Promise<Deal> {
+    const [newDeal] = await db.insert(schema.deals).values(deal).returning();
+    return newDeal;
+  }
+
+  async updateDeal(id: string, deal: Partial<InsertDeal>): Promise<Deal | undefined> {
+    const [updated] = await db.update(schema.deals)
+      .set(deal)
+      .where(eq(schema.deals.id, id))
+      .returning();
+    return updated;
+  }
+
+  async deleteDeal(id: string): Promise<void> {
+    await db.delete(schema.deals).where(eq(schema.deals.id, id));
   }
 }
 
