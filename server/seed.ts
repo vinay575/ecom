@@ -1,5 +1,6 @@
 import { db } from "./db";
 import * as schema from "@shared/schema";
+import { hashPassword } from "./authUtils";
 
 const categories = ["UI Kits", "Templates", "Plugins", "AI Tools", "Code Scripts", "Mobile Apps"];
 
@@ -137,11 +138,41 @@ const sampleProducts = [
 async function seed() {
   console.log("Seeding database...");
 
+  const adminPasswordHash = await hashPassword("admin123");
+  const userPasswordHash = await hashPassword("user123");
+
+  console.log("Creating admin user...");
+  await db.insert(schema.users).values({
+    email: "admin@digitalhub.com",
+    name: "Admin User",
+    passwordHash: adminPasswordHash,
+    phone: "+1 234 567 8900",
+    address: "123 Admin St, Digital City, DC 12345",
+    role: "admin",
+  }).onConflictDoNothing();
+
+  console.log("Creating regular user...");
+  await db.insert(schema.users).values({
+    email: "user@digitalhub.com",
+    name: "Regular User",
+    passwordHash: userPasswordHash,
+    phone: "+1 234 567 8901",
+    address: "456 User Ave, Digital Town, DT 67890",
+    role: "user",
+  }).onConflictDoNothing();
+
+  console.log("Seeding products...");
   for (const product of sampleProducts) {
-    await db.insert(schema.products).values(product);
+    await db.insert(schema.products).values(product).onConflictDoNothing();
   }
 
-  console.log("Database seeded successfully!");
+  console.log("\n✅ Database seeded successfully!");
+  console.log("\n📧 Admin Credentials:");
+  console.log("   Email: admin@digitalhub.com");
+  console.log("   Password: admin123");
+  console.log("\n👤 User Credentials:");
+  console.log("   Email: user@digitalhub.com");
+  console.log("   Password: user123\n");
 }
 
 seed().catch(console.error);
