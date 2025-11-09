@@ -98,7 +98,7 @@ export function Header() {
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Button onClick={() => window.location.href = '/api/login'} data-testid="button-login">
+              <Button onClick={() => window.location.href = '/auth'} data-testid="button-login">
                 Login
               </Button>
             )}

@@ -478,7 +478,7 @@ app.get("/api/home-slides", async (req, res) => {
         ctaText: "Shop Deals",
         ctaLink: "/deals",
         imageUrl: "/attached_assets/stock_images/digital_products_sof_b692c7cf.jpg",
-        backgroundColor: "#f97316",
+        backgroundColor: "#8b5cf6",
         highlights: [
           "Save big on top-rated digital assets and software",
           "Exclusive bundles for developers and designers",
@@ -493,7 +493,7 @@ app.get("/api/home-slides", async (req, res) => {
         ctaText: "Learn More",
         ctaLink: "/categories",
         imageUrl: "/attached_assets/stock_images/digital_products_sof_45914c21.jpg",
-        backgroundColor: "#ea580c",
+        backgroundColor: "#3b82f6",
         highlights: [
           "Boost productivity using AI automation and analytics",
           "Smart design and coding tools for faster projects",

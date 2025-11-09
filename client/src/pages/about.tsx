@@ -35,48 +35,48 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-950">
       <AnnouncementBar />
       <Header />
-      <section className="py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+      <section className="py-12 md:py-16 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">About DigitalHub</h1>
-          <p className="text-xl max-w-3xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">About DigitalHub</h1>
+          <p className="text-base sm:text-lg md:text-xl max-w-3xl mx-auto">
             Empowering creators and customers with the world's best digital marketplace
           </p>
         </div>
       </section>
 
-      <section className="py-16">
+      <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
           <Card className="max-w-6xl mx-auto overflow-hidden">
             <div className="grid lg:grid-cols-2 gap-0">
-              <div className="relative h-64 lg:h-auto">
+              <div className="relative h-48 sm:h-64 lg:h-auto">
                 <img
                   src="/attached_assets/stock_images/professional_team_wo_e96463ec.jpg"
                   alt="Our Team"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <CardContent className="p-8 lg:p-12 flex flex-col justify-center">
-                <h2 className="text-3xl font-bold mb-6">Who We Are</h2>
-                <p className="text-lg text-muted-foreground mb-4">
+              <CardContent className="p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
+                <h2 className="text-2xl sm:text-3xl font-bold mb-4 md:mb-6">Who We Are</h2>
+                <p className="text-base sm:text-lg text-muted-foreground mb-3 md:mb-4">
                   DigitalHub is the premier marketplace for digital products, connecting talented creators with customers worldwide. 
                   Since 2020, we've been dedicated to providing a secure, user-friendly platform where innovation meets accessibility.
                 </p>
-                <p className="text-lg text-muted-foreground mb-6">
+                <p className="text-base sm:text-lg text-muted-foreground mb-4 md:mb-6">
                   Our platform hosts thousands of high-quality digital products including UI kits, templates, plugins, graphics, 
                   and more. We believe in empowering both creators and customers, fostering a community built on trust, quality, and innovation.
                 </p>
-                <div className="grid grid-cols-3 gap-6 pt-4 border-t">
+                <div className="grid grid-cols-3 gap-3 sm:gap-6 pt-4 border-t">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-1">10K+</div>
-                    <div className="text-sm text-muted-foreground">Creators</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">10K+</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Creators</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-1">100K+</div>
-                    <div className="text-sm text-muted-foreground">Customers</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">100K+</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Customers</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-primary mb-1">50+</div>
-                    <div className="text-sm text-muted-foreground">Countries</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">50+</div>
+                    <div className="text-xs sm:text-sm text-muted-foreground">Countries</div>
                   </div>
                 </div>
               </CardContent>
