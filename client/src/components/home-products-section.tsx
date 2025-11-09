@@ -25,21 +25,21 @@ export function HomeProductsSection() {
   }
 
   return (
-    <section className="py-20 bg-black overflow-hidden">
+    <section className="py-20 bg-gray-50 dark:bg-gray-900 overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-14 text-center md:text-left">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-orange-500">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
               Featured Products
             </h2>
-            <p className="text-gray-300 text-base md:text-lg mt-2">
+            <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg mt-2">
               Explore hand-picked premium products from top creators
             </p>
           </div>
 
           <a href="/products" className="mt-6 md:mt-0">
-            <Button variant="outline" className="group hidden md:flex border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">
+            <Button variant="outline" className="group hidden md:flex">
               View All Products
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -56,9 +56,9 @@ export function HomeProductsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <Card className="group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-gray-900 shadow-sm hover:shadow-xl hover:shadow-orange-500/20 hover:border-orange-500 transition-all duration-300 h-full">
+              <Card className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-xl transition-all duration-300 h-full">
                 {/* Image */}
-                <div className="relative w-full h-[160px] overflow-hidden bg-gray-800 rounded-t-2xl">
+                <div className="relative w-full h-[160px] overflow-hidden bg-gray-50 dark:bg-gray-800 rounded-t-2xl">
                   {product.image ? (
                     <img
                       src={product.image}
@@ -72,7 +72,7 @@ export function HomeProductsSection() {
                   )}
 
                   {product.isFeatured && (
-                    <Badge className="absolute left-3 top-3 bg-gradient-to-r from-orange-500 to-amber-500 text-white shadow-sm">
+                    <Badge className="absolute left-3 top-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-sm">
                       Featured
                     </Badge>
                   )}
@@ -82,7 +82,7 @@ export function HomeProductsSection() {
                     variant="secondary"
                     className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 bg-gray-800/90 backdrop-blur-sm transition-opacity duration-300"
                   >
-                    <Heart className="h-4 w-4 text-orange-500" />
+                    <Heart className="h-4 w-4" />
                   </Button>
                 </div>
 
@@ -90,22 +90,22 @@ export function HomeProductsSection() {
                 <CardContent className="p-4 flex-1 flex flex-col justify-between">
                   <Badge
                     variant="secondary"
-                    className="mb-2 w-fit text-xs font-medium bg-gray-800 text-orange-400 border border-orange-500/30"
+                    className="mb-2 w-fit text-xs font-medium"
                   >
                     {product.category}
                   </Badge>
 
-                  <h3 className="font-semibold mb-1 line-clamp-2 text-sm md:text-base text-white group-hover:text-orange-400 transition-colors">
+                  <h3 className="font-semibold mb-1 line-clamp-2 text-sm md:text-base text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {product.title}
                   </h3>
 
-                  <p className="text-xs text-gray-400 mb-3">
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
                     by {product.author}
                   </p>
 
-                  <div className="flex items-center gap-2 text-xs text-gray-300">
+                  <div className="flex items-center gap-2 text-xs text-gray-700 dark:text-gray-300">
                     <div className="flex items-center gap-1">
-                      <Star className="h-3.5 w-3.5 fill-orange-500 text-orange-500" />
+                      <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
                       <span className="font-medium">
                         {Number(product.rating).toFixed(1)}
                       </span>
@@ -121,13 +121,13 @@ export function HomeProductsSection() {
                 </CardContent>
 
                 {/* Footer */}
-                <CardFooter className="p-4 border-t border-gray-800 flex items-center justify-between">
-                  <div className="text-base font-semibold text-orange-500">
+                <CardFooter className="p-4 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                  <div className="text-base font-semibold text-gray-900 dark:text-white">
                     ${Number(product.price).toFixed(2)}
                   </div>
                   <Button
                     size="sm"
-                    className="gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white"
+                    className="gap-2"
                   >
                     <ShoppingCart className="h-4 w-4" />
                     Add
@@ -141,7 +141,7 @@ export function HomeProductsSection() {
         {/* Mobile “View All” */}
         <div className="mt-10 text-center md:hidden">
           <a href="/products">
-            <Button variant="outline" className="group border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">
+            <Button variant="outline" className="group">
               View All Products
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
