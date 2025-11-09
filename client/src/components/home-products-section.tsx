@@ -25,21 +25,21 @@ export function HomeProductsSection() {
   }
 
   return (
-    <section className="py-10 bg-gradient-to-b from-white via-gray-50 to-gray-100 dark:from-gray-950 dark:to-gray-900 overflow-hidden">
+    <section className="py-20 bg-black overflow-hidden">
       <div className="container mx-auto px-6 max-w-7xl">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-14 text-center md:text-left">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold" style={{ color: "hsl(23.95deg 95% 52.94%)" }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-orange-500">
               Featured Products
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 text-base md:text-lg" >
+            <p className="text-gray-300 text-base md:text-lg mt-2">
               Explore hand-picked premium products from top creators
             </p>
           </div>
 
           <a href="/products" className="mt-6 md:mt-0">
-            <Button variant="outline" className="group hidden md:flex">
+            <Button variant="outline" className="group hidden md:flex border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">
               View All Products
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
@@ -56,9 +56,9 @@ export function HomeProductsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <Card className="group flex flex-col overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm hover:shadow-md transition-all duration-300 h-full">
+              <Card className="group flex flex-col overflow-hidden rounded-2xl border border-gray-800 bg-gray-900 shadow-sm hover:shadow-xl hover:shadow-orange-500/20 hover:border-orange-500 transition-all duration-300 h-full">
                 {/* Image */}
-                <div className="relative w-full h-[160px] overflow-hidden bg-gray-100 dark:bg-gray-800 rounded-t-2xl">
+                <div className="relative w-full h-[160px] overflow-hidden bg-gray-800 rounded-t-2xl">
                   {product.image ? (
                     <img
                       src={product.image}
@@ -80,9 +80,9 @@ export function HomeProductsSection() {
                   <Button
                     size="icon"
                     variant="secondary"
-                    className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 bg-white/90 dark:bg-gray-800/80 backdrop-blur-sm transition-opacity duration-300"
+                    className="absolute right-3 top-3 opacity-0 group-hover:opacity-100 bg-gray-800/90 backdrop-blur-sm transition-opacity duration-300"
                   >
-                    <Heart className="h-4 w-4 text-gray-700 dark:text-gray-200" />
+                    <Heart className="h-4 w-4 text-orange-500" />
                   </Button>
                 </div>
 
@@ -90,30 +90,30 @@ export function HomeProductsSection() {
                 <CardContent className="p-4 flex-1 flex flex-col justify-between">
                   <Badge
                     variant="secondary"
-                    className="mb-2 w-fit text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300"
+                    className="mb-2 w-fit text-xs font-medium bg-gray-800 text-orange-400 border border-orange-500/30"
                   >
                     {product.category}
                   </Badge>
 
-                  <h3 className="font-semibold mb-1 line-clamp-2 text-sm md:text-base text-gray-900 dark:text-white group-hover:text-indigo-600 transition-colors">
+                  <h3 className="font-semibold mb-1 line-clamp-2 text-sm md:text-base text-white group-hover:text-orange-400 transition-colors">
                     {product.title}
                   </h3>
 
-                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-3">
+                  <p className="text-xs text-gray-400 mb-3">
                     by {product.author}
                   </p>
 
-                  <div className="flex items-center gap-2 text-xs text-gray-700 dark:text-gray-300">
+                  <div className="flex items-center gap-2 text-xs text-gray-300">
                     <div className="flex items-center gap-1">
-                      <Star className="h-3.5 w-3.5 fill-yellow-500 text-yellow-500" />
+                      <Star className="h-3.5 w-3.5 fill-orange-500 text-orange-500" />
                       <span className="font-medium">
                         {Number(product.rating).toFixed(1)}
                       </span>
                     </div>
-                    <span className="text-gray-400">•</span>
+                    <span className="text-gray-600">•</span>
                     <div className="flex items-center gap-1">
-                      <Download className="h-3.5 w-3.5 text-gray-400" />
-                      <span className="text-gray-500 dark:text-gray-400">
+                      <Download className="h-3.5 w-3.5 text-gray-500" />
+                      <span className="text-gray-400">
                         {product.downloads}
                       </span>
                     </div>
@@ -121,13 +121,13 @@ export function HomeProductsSection() {
                 </CardContent>
 
                 {/* Footer */}
-                <CardFooter className="p-4 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between">
-                  <div className="text-base font-semibold text-gray-900 dark:text-white">
+                <CardFooter className="p-4 border-t border-gray-800 flex items-center justify-between">
+                  <div className="text-base font-semibold text-orange-500">
                     ${Number(product.price).toFixed(2)}
                   </div>
                   <Button
                     size="sm"
-                    className="gap-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500"
+                    className="gap-2 bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white"
                   >
                     <ShoppingCart className="h-4 w-4" />
                     Add
@@ -141,7 +141,7 @@ export function HomeProductsSection() {
         {/* Mobile “View All” */}
         <div className="mt-10 text-center md:hidden">
           <a href="/products">
-            <Button variant="outline" className="group">
+            <Button variant="outline" className="group border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white">
               View All Products
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>

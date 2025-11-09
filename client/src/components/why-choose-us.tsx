@@ -72,7 +72,7 @@ const features = [
 
 export function WhyChooseUs() {
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-gray-950 dark:to-gray-900">
+    <section className="relative py-20 overflow-hidden bg-black">
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Header */}
         <motion.div
@@ -82,10 +82,10 @@ export function WhyChooseUs() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white " style={{ color: "hsl(23.95deg 95% 52.94%)" }}>
+          <h2 className="text-3xl md:text-4xl font-bold text-orange-500">
             Why Choose Us
           </h2>
-          <p className="mt-4 text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-xl mx-auto">
+          <p className="mt-4 text-gray-300 text-base md:text-lg max-w-xl mx-auto">
             Crafted with precision and passion — experience technology that’s
             built to inspire confidence.
           </p>
@@ -104,17 +104,17 @@ export function WhyChooseUs() {
                 transition={{ duration: 0.4, delay: i * 0.05 }}
                 whileHover={{ y: -8, scale: 1.02 }}
               >
-                <Card className="rounded-xl h-full bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-[0_6px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.1)] transition-all duration-300">
+                <Card className="rounded-xl h-full bg-gray-900 border border-gray-800 shadow-[0_6px_20px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-orange-500/20 hover:border-orange-500 transition-all duration-300">
                   <CardContent className="p-6 text-center flex flex-col items-center">
                     <div
                       className={`mb-4 flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${feature.color} text-white shadow-md`}
                     >
                       <Icon className="w-7 h-7" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+                    <h3 className="text-lg font-semibold text-white mb-1">
                       {feature.title}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-sm text-gray-400 leading-relaxed">
                       {feature.description}
                     </p>
                   </CardContent>

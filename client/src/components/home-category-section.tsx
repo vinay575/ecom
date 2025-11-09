@@ -13,9 +13,9 @@ const categories = [
 
 export function HomeCategorySection() {
   return (
-    <section className="relative py-8 bg-gray-100 dark:bg-gray-900/50 dark:from-gray-950 overflow-hidden">
+    <section className="relative py-8 bg-gray-900 overflow-hidden">
       {/* Subtle gradient accent background */}
-      <div className="absolute inset-0  pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-transparent pointer-events-none" />
 
       <div className="container mx-auto px-6 max-w-7xl relative">
         {/* Header */}
@@ -26,10 +26,10 @@ export function HomeCategorySection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-<h2 className="text-3xl md:text-4xl font-bold "  style={{ color: "hsl(23.95deg 95% 52.94%)" }}>
+<h2 className="text-3xl md:text-4xl font-bold text-orange-500">
             Browse by Category
           </h2>
-          <p className="mt-3 text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="mt-3 text-base text-gray-300 max-w-2xl mx-auto">
             Explore our curated collection of digital tools and assets.
           </p>
         </motion.div>
@@ -49,15 +49,15 @@ export function HomeCategorySection() {
                 whileHover={{ y: -5, scale: 1.02 }}
                 className="block"
               >
-                <Card className="flex flex-col items-center gap-3 p-5 text-center rounded-xl bg-white dark:bg-gray-900 shadow-[0_4px_15px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.1)] border border-gray-200 dark:border-gray-800 transition-all duration-300">
+                <Card className="flex flex-col items-center gap-3 p-5 text-center rounded-xl bg-black border border-gray-800 shadow-[0_4px_15px_rgba(0,0,0,0.05)] hover:shadow-xl hover:shadow-orange-500/20 hover:border-orange-500 transition-all duration-300">
                   <div className={`p-3 rounded-xl bg-gradient-to-br ${category.color} text-white shadow-md`}>
                     <Icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-sm text-gray-900 dark:text-white mb-1">
+                    <h3 className="font-semibold text-sm text-white mb-1">
                       {category.name}
                     </h3>
-                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                    <p className="text-xs text-gray-400">
                       {category.count}+ items
                     </p>
                   </div>
