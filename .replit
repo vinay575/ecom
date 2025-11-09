@@ -13,11 +13,10 @@ run = ["npm", "run", "start"]
 [[ports]]
 localPort = 5000
 externalPort = 80
-exposeLocalhost = true
 
 [[ports]]
-localPort = 39673
-externalPort = 3002
+localPort = 41473
+externalPort = 3001
 
 [[ports]]
 localPort = 46151
@@ -46,6 +45,9 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[workflows.workflow.metadata]
+outputType = "webview"
 
 [agent]
 integrations = ["javascript_stripe:1.0.0", "javascript_log_in_with_replit:1.0.0", "javascript_openai:1.0.0", "javascript_database:1.0.0"]
