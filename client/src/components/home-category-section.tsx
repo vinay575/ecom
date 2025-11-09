@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
 
 const categories = [
-  { icon: Palette, name: "UI Kits", count: 1200, color: "from-blue-500 to-indigo-500", href: "/products?category=UI+Kits" },
+  { icon: Palette, name: "UI Kits", count: 1200, color: "from-orange-500 to-red-500", href: "/products?category=UI+Kits" },
   { icon: Code, name: "Templates", count: 850, color: "from-green-500 to-emerald-500", href: "/products?category=Templates" },
   { icon: Puzzle, name: "Plugins", count: 640, color: "from-purple-500 to-pink-500", href: "/products?category=Plugins" },
   { icon: Wand2, name: "AI Tools", count: 320, color: "from-orange-500 to-amber-500", href: "/products?category=AI+Tools" },

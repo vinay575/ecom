@@ -73,7 +73,7 @@ export function HomeProductRequest() {
           {/* Left Text Content */}
           <div className="max-w-3xl">
             <div className="flex items-center gap-3 mb-2">
-              <div className="p-2.5 rounded-lg bg-gradient-to-br from-indigo-600 to-orange-500 shadow-sm">
+              <div className="p-2.5 rounded-lg bg-gradient-to-br from-orange-500 to-red-600 shadow-sm">
                 <Lightbulb className="h-5 w-5 text-white" />
               </div>
               <h2 className="text-xl md:text-2xl font-semibold text-gray-900 dark:text-white">
@@ -95,7 +95,7 @@ export function HomeProductRequest() {
             <DialogTrigger asChild>
               <Button
                 size="sm"
-                className="bg-gradient-to-r from-indigo-600 to-orange-500 hover:from-indigo-700 hover:to-orange-600 text-sm px-5 py-2.5 rounded-md shadow-sm hover:shadow-md transition-all whitespace-nowrap"
+                className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-sm px-5 py-2.5 rounded-md shadow-sm hover:shadow-md transition-all whitespace-nowrap"
               >
                 <Sparkles className="mr-2 h-4 w-4" />
                 Request Product
@@ -127,7 +127,7 @@ export function HomeProductRequest() {
                     value={productName}
                     onChange={(e) => setProductName(e.target.value)}
                     required
-                    className="h-8 text-sm rounded-md border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500"
+                    className="h-8 text-sm rounded-md border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
 
@@ -145,7 +145,7 @@ export function HomeProductRequest() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="h-8 text-sm rounded-md border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500"
+                    className="h-8 text-sm rounded-md border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-orange-500"
                   />
                 </div>
 
@@ -162,7 +162,7 @@ export function HomeProductRequest() {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     rows={2}
-                    className="text-sm rounded-md border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 resize-none"
+                    className="text-sm rounded-md border-gray-300 dark:border-gray-700 focus:ring-2 focus:ring-orange-500 resize-none"
                   />
                 </div>
 
@@ -173,7 +173,7 @@ export function HomeProductRequest() {
                   <Button
                     type="submit"
                     size="sm"
-                    className="bg-gradient-to-r from-indigo-600 to-orange-500 hover:from-indigo-700 hover:to-orange-600 text-xs px-4 py-1.5 rounded-md"
+                    className="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-600 hover:to-red-700 text-xs px-4 py-1.5 rounded-md"
                     disabled={requestMutation.isPending}
                   >
                     {requestMutation.isPending ? (

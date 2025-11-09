@@ -17,7 +17,7 @@ const features = [
     title: "Secure Payments",
     description:
       "Bank-grade encryption ensures every transaction is private, secure, and trusted.",
-    color: "from-blue-500 to-indigo-500",
+    color: "from-orange-500 to-red-500",
   },
   {
     icon: Zap,
@@ -38,28 +38,28 @@ const features = [
     title: "Quality Guarantee",
     description:
       "Every product is tested, verified, and optimized for superior performance.",
-    color: "from-fuchsia-500 to-purple-600",
+    color: "from-purple-500 to-pink-600",
   },
   {
     icon: CheckCircle,
     title: "Money Back",
     description:
       "100% satisfaction guaranteed or your money back — no fine print.",
-    color: "from-pink-500 to-rose-600",
+    color: "from-rose-500 to-red-600",
   },
   {
     icon: TrendingUp,
     title: "Regular Updates",
     description:
       "Always stay ahead — every product gets continuous feature upgrades.",
-    color: "from-indigo-400 to-violet-600",
+    color: "from-orange-400 to-red-600",
   },
   {
     icon: Users,
     title: "Trusted by Thousands",
     description:
       "Join a community of over 20,000 happy customers who rely on us daily.",
-    color: "from-cyan-400 to-blue-600",
+    color: "from-amber-400 to-orange-600",
   },
   {
     icon: Sparkles,

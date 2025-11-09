@@ -462,8 +462,8 @@ app.get("/api/home-slides", async (req, res) => {
           "Discover cutting-edge digital solutions for your business",
         ctaText: "Explore Now",
         ctaLink: "/products",
-        imageUrl: "/attached_assets/generated_images/hero-slide-1.png",
-        backgroundColor: "#6366f1",
+        imageUrl: "/attached_assets/stock_images/modern_digital_marke_8c277cbd.jpg",
+        backgroundColor: "#f97316",
         highlights: [
           "Exclusive access to premium digital templates and tools",
           "Handpicked resources for professionals and creators",
@@ -477,7 +477,7 @@ app.get("/api/home-slides", async (req, res) => {
         description: "Limited time offer on all categories",
         ctaText: "Shop Deals",
         ctaLink: "/deals",
-        imageUrl: "/attached_assets/generated_images/hero-slide-2.png",
+        imageUrl: "/attached_assets/stock_images/digital_products_sof_b692c7cf.jpg",
         backgroundColor: "#f97316",
         highlights: [
           "Save big on top-rated digital assets and software",
@@ -492,8 +492,8 @@ app.get("/api/home-slides", async (req, res) => {
         description: "Transform your workflow with intelligent solutions",
         ctaText: "Learn More",
         ctaLink: "/categories",
-        imageUrl: "/attached_assets/generated_images/hero-slide-3.png",
-        backgroundColor: "#8b5cf6",
+        imageUrl: "/attached_assets/stock_images/digital_products_sof_45914c21.jpg",
+        backgroundColor: "#ea580c",
         highlights: [
           "Boost productivity using AI automation and analytics",
           "Smart design and coding tools for faster projects",

@@ -51,8 +51,8 @@ export function AnnouncementBar() {
   const currentAnnouncement = announcements[currentIndex];
 
   const bgColors = {
-    info: "bg-blue-600",
-    promo: "bg-gradient-to-r from-indigo-600 to-purple-600",
+    info: "bg-orange-600",
+    promo: "bg-gradient-to-r from-orange-600 to-red-600",
     warning: "bg-amber-500",
   };
 

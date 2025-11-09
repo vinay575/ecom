@@ -110,7 +110,7 @@ export default function ProductRequestPage() {
           <div className="max-w-3xl mx-auto">
             <Card className="border-2">
               <CardContent className="p-12 text-center">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white mb-6">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-orange-600 to-red-600 text-white mb-6">
                   <Lightbulb className="h-10 w-10" />
                 </div>
                 <h2 className="text-3xl font-bold mb-4">Have a Product in Mind?</h2>
@@ -201,12 +201,12 @@ export default function ProductRequestPage() {
               </CardContent>
             </Card>
 
-            <div className="mt-8 p-6 bg-blue-50 dark:bg-blue-950 border border-blue-200 dark:border-blue-800 rounded-lg">
-              <h3 className="font-semibold mb-2 flex items-center gap-2 text-blue-900 dark:text-blue-100">
+            <div className="mt-8 p-6 bg-orange-50 dark:bg-orange-950 border border-orange-200 dark:border-orange-800 rounded-lg">
+              <h3 className="font-semibold mb-2 flex items-center gap-2 text-orange-900 dark:text-orange-100">
                 <Lightbulb className="h-5 w-5" />
                 Pro Tip
               </h3>
-              <p className="text-sm text-blue-700 dark:text-blue-300">
+              <p className="text-sm text-orange-700 dark:text-orange-300">
                 Before requesting a product, try browsing our marketplace or using the search feature. 
                 You might find exactly what you need or discover even better alternatives!
               </p>

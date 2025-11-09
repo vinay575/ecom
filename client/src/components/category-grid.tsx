@@ -2,7 +2,7 @@ import { Palette, Code, Puzzle, Wand2, FileCode, Smartphone } from "lucide-react
 import { Card } from "@/components/ui/card";
 
 const categories = [
-  { icon: Palette, name: "UI Kits", count: 1200, color: "text-blue-500" },
+  { icon: Palette, name: "UI Kits", count: 1200, color: "text-orange-500" },
   { icon: Code, name: "Templates", count: 850, color: "text-green-500" },
   { icon: Puzzle, name: "Plugins", count: 640, color: "text-purple-500" },
   { icon: Wand2, name: "AI Tools", count: 320, color: "text-primary" },

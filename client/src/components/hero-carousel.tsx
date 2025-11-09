@@ -41,7 +41,7 @@ export function HeroCarousel() {
   // Default UI while loading
   if (slides.length === 0) {
     return (
-      <section className="flex items-center justify-center h-[80vh] bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white text-center">
+      <section className="flex items-center justify-center h-[80vh] bg-gradient-to-br from-orange-600 via-red-600 to-amber-500 text-white text-center">
         <div>
           <motion.h1 className="text-5xl font-bold mb-4">
             Welcome to DigitalHub
@@ -51,7 +51,7 @@ export function HeroCarousel() {
           </motion.p>
           <Button
             size="lg"
-            className="bg-white text-indigo-600 hover:bg-gray-200 transition"
+            className="bg-white text-orange-600 hover:bg-gray-200 transition"
             onClick={() => navigate("/products")} // ✅ Wouter navigation
           >
             Explore Products
@@ -129,14 +129,14 @@ export function HeroCarousel() {
                   {/* Buttons */}
                   <div className="flex flex-wrap justify-center md:justify-start gap-4">
                     <Button
-                      size="md"
+                      size="lg"
                       onClick={() => navigate(slide.ctaLink)} // ✅ Wouter navigation
                       className="bg-gradient-to-r from-orange-500 via-pink-500 to-purple-600 hover:opacity-90 rounded-full text-white font-semibold px-8 py-5 shadow-lg transition-all duration-300"
                     >
                       {slide.ctaText}
                     </Button>
                     <Button
-                      size="md"
+                      size="lg"
                       onClick={() => navigate("/contact")} // ✅ Contact navigation
                       className="bg-white/10 hover:bg-white/20 rounded-full text-white font-semibold px-8 py-5 border border-white/20 backdrop-blur-md transition-all"
                     >

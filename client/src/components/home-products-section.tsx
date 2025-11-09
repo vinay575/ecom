@@ -95,7 +95,7 @@ export function HomeProductsSection() {
                     {product.category}
                   </Badge>
 
-                  <h3 className="font-semibold mb-1 line-clamp-2 text-sm md:text-base text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h3 className="font-semibold mb-1 line-clamp-2 text-sm md:text-base text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                     {product.title}
                   </h3>
 
